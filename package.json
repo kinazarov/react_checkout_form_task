@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.0.2",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.1.0",
+    "cross-env": "^7.0.3",
     "date-fns": "^2.9.0",
     "dayjs": "^1.11.6",
     "formik": "^2.1.3",
