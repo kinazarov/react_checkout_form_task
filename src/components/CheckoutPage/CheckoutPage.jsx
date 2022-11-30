@@ -22,7 +22,7 @@ import formInitialValues from './FormModel/formInitialValues';
 import useStyles from './styles';
 
 // here should be actual data retrieving
-const storesData = require('./mock.json');
+import { storesData } from './mock';
 
 const steps = ['Personal Information', 'Order Date & time', 'Payment'];
 const { formId, formField } = checkoutFormModel;
