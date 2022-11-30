@@ -11,6 +11,7 @@ import { Formik, Form } from 'formik';
 
 import AddressForm from './Forms/AddressForm';
 import PaymentForm from './Forms/PaymentForm';
+import OrderdatesForm from './Forms/OrderdatesForm';
 import ReviewOrder from './ReviewOrder';
 import CheckoutSuccess from './CheckoutSuccess';
 
@@ -20,7 +21,10 @@ import formInitialValues from './FormModel/formInitialValues';
 
 import useStyles from './styles';
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+// here should be actual data retrieving
+const storesData = require('./mock.json');
+
+const steps = ['Personal Information', 'Order Date & time', 'Payment'];
 const { formId, formField } = checkoutFormModel;
 
 function _renderStepContent(step) {
@@ -28,9 +32,11 @@ function _renderStepContent(step) {
     case 0:
       return <AddressForm formField={formField} />;
     case 1:
-      return <PaymentForm formField={formField} />;
+      return <OrderdatesForm formField={formField} />;
     case 2:
-      return <ReviewOrder />;
+      return <PaymentForm />;
+    case 3:
+      return <ReviewOrder formField={formField} />;
     default:
       return <div>Not Found</div>;
   }

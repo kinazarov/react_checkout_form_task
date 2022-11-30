@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import moment from 'dayjs';
 import { Typography, Grid } from '@material-ui/core';
 import useStyles from './styles';
 
