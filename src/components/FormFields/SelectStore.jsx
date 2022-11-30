@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { at } from 'lodash';
 import { useField } from 'formik';
 import {
