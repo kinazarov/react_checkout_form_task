@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { Formik, Form } from 'formik';
 
-import AddressForm from './Forms/AddressForm';
+import PersonForm from './Forms/PersonForm';
 import PaymentForm from './Forms/PaymentForm';
 import OrderdatesForm from './Forms/OrderdatesForm';
 import ReviewOrder from './ReviewOrder';
@@ -30,11 +30,11 @@ const { formId, formField } = checkoutFormModel;
 function _renderStepContent(step) {
   switch (step) {
     case 0:
-      return <AddressForm formField={formField} />;
+      return <PersonForm formField={formField} />;
     case 1:
       return <OrderdatesForm formField={formField} storesData={storesData} />;
     case 2:
-      return <PaymentForm />;
+      return <PaymentForm formField={formField} />;
     case 3:
       return <ReviewOrder formField={formField} />;
     default:

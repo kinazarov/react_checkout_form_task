@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { InputField } from '../../FormFields';
 
-export default function AddressForm(props) {
+export default function PersonForm(props) {
   const {
     formField: { firstName, lastName, email }
   } = props;

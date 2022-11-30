@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core';
 
 function SelectField(props) {
-  console.log('SelectField', props);
   const { label, data, ...rest } = props;
   const [field, meta] = useField(props);
   const { value: selectedValue } = field;

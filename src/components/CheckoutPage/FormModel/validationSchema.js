@@ -27,19 +27,7 @@ export default [
       .matches(emailRegex, email.invalidErrorMsg)
   }),
   Yup.object().shape({
-    [storeDate.name]: Yup.string()
-      .required(`${storeDate.requiredErrorMsg}`)
-      .test('expDate', storeDate.invalidErrorMsg, val => {
-        if (val) {
-          const startDate = moment();
-          const endDate = moment().add(1, 'month');
-          if (moment(val, moment.ISO_8601).isValid()) {
-            return moment(val).isBetween(startDate, endDate);
-          }
-          return false;
-        }
-        return false;
-      })
+    [storeDate.name]: Yup.string().required(`${storeDate.requiredErrorMsg}`)
   }),
   Yup.object().shape({
     [nameOnCard.name]: Yup.string().required(`${nameOnCard.requiredErrorMsg}`),

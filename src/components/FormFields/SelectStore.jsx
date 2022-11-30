@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DataGrid } from '@mui/x-data-grid';
 import { at } from 'lodash';
 import { useField } from 'formik';
 import {
@@ -13,6 +12,7 @@ import {
 
 function SelectStore(props) {
   const { label, data, ...rest } = props;
+  console.log('$$$', props, rest);
   const [field, meta] = useField(props);
   const { value: selectedValue } = field;
   const [touched, error] = at(meta, 'touched', 'error');
@@ -28,7 +28,7 @@ function SelectStore(props) {
       <InputLabel>{label}</InputLabel>
       <Select {...field} value={selectedValue ? selectedValue : ''}>
         {data.map(item => (
-          <MenuItem key={item.id} value={item.id}>
+          <MenuItem key={item.id} value={item.date}>
             {item.date}
           </MenuItem>
         ))}

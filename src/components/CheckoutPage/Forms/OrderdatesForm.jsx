@@ -3,7 +3,6 @@ import { Grid, Typography } from '@material-ui/core';
 import { SelectStore } from '../../FormFields';
 
 export default function OrderdatesForm(props) {
-  console.log('OrderdatesForm', props);
   const {
     formField: { storeDate }
   } = props;
