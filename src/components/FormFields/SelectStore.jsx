@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import { at } from 'lodash';
 import { useField } from 'formik';
 import {
@@ -27,8 +28,8 @@ function SelectStore(props) {
       <InputLabel>{label}</InputLabel>
       <Select {...field} value={selectedValue ? selectedValue : ''}>
         {data.map(item => (
-          <MenuItem key={item.id} value={item.value}>
-            {item.label}
+          <MenuItem key={item.id} value={item.id}>
+            {item.date}
           </MenuItem>
         ))}
       </Select>

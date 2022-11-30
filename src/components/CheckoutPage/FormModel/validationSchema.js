@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import moment from 'moment';
+import moment from 'dayjs';
 import checkoutFormModel from './checkoutFormModel';
 const {
   formField: {

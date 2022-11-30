@@ -1,8 +1,9 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
-import { InputField } from '../../FormFields';
+import { SelectStore } from '../../FormFields';
 
 export default function OrderdatesForm(props) {
+  console.log('OrderdatesForm', props);
   const {
     formField: { storeDate }
   } = props;
@@ -14,7 +15,12 @@ export default function OrderdatesForm(props) {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <InputField name={storeDate.name} label={storeDate.label} fullWidth />
+          <SelectStore
+            name={storeDate.name}
+            label={storeDate.label}
+            data={props.storesData}
+            fullWidth
+          />
         </Grid>
       </Grid>
     </React.Fragment>

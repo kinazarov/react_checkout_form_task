@@ -32,7 +32,7 @@ function _renderStepContent(step) {
     case 0:
       return <AddressForm formField={formField} />;
     case 1:
-      return <OrderdatesForm formField={formField} />;
+      return <OrderdatesForm formField={formField} storesData={storesData} />;
     case 2:
       return <PaymentForm />;
     case 3:
