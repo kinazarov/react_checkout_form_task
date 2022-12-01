@@ -9,6 +9,7 @@ export default function OrderdatesForm(props) {
 
   const [dateTimeState, setDateTimeState] = React.useState(props.datesData);
   const fmContext = useFormikContext();
+  console.log(fmContext);
 
   function cellClick(e) {
     const desired_date_id = e.target.getAttribute('desired_date_id');
