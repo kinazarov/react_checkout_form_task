@@ -1,10 +1,9 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { SelectDateTime } from '../../FormFields';
-import { map } from 'lodash';
+import { useField } from 'formik';
 
 export default function OrderdatesForm(props) {
-
   console.log(props);
 
   const [dateTimeState, setDateTimeState] = React.useState(props.datesData);
@@ -15,20 +14,18 @@ export default function OrderdatesForm(props) {
     formField: { desiredDate, desiredTime }
   } = props;
 
-
   console.log('OrderdatesForm props', props);
   const cellClick = e => {
     console.log('OrderdatesForm table cell ', e.target);
     const desired_date_id = e.target.desired_date_id;
     const desired_time_id = e.target.desired_time_id;
 
-    const newState = map(
-      props.datesData,
-      (date_element) => {
-        {...date_element, "available_hours" : date_element.available_hours}
-      }
-    )
-
+    // const newState = map(
+    //   props.datesData,
+    //   (key, value) => {
+    //     {...date_element, "available_hours" : date_element.available_hours}
+    //   }
+    // )
 
     e.target.style.background = 'cyan';
   };
