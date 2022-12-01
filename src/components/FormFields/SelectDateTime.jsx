@@ -24,7 +24,7 @@ function SelectDateTime(props) {
                 <TableCell
                   component="td"
                   key={row.id}
-                  style={{ backgroundColor: 'primary' }}
+                  style={{ backgroundColor: row.color }}
                 >
                   {row.date}
                 </TableCell>
@@ -35,7 +35,7 @@ function SelectDateTime(props) {
                       desired_time_id={cell.id}
                       key={cell.id}
                       component="td"
-                      style={{ backgroundColor: 'cyan' }}
+                      style={{ backgroundColor: cell.color }}
                       onClick={cellClick}
                     >
                       {cell.hours}
