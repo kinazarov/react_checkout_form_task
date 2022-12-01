@@ -25,7 +25,7 @@ export default function OrderdatesForm(props) {
     const newState = map(
       props.datesData,
       (date_element) => {
-        
+        {...date_element, "available_hours" : date_element.available_hours}
       }
     )
 

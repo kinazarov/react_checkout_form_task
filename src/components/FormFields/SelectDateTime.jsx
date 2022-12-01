@@ -20,21 +20,38 @@ function SelectDateTime(props) {
         <Table>
           <TableBody>
             {data.map(row => (
-              <TableRow key={"ROW" + row.id}>
-                <TableCell component="td" key={row.id}>
+              <TableRow key={'ROW' + row.id}>
+                <TableCell
+                  component="td"
+                  key={row.id}
+                  style={{ backgroundColor: 'primary' }}
+                >
                   {row.date}
                 </TableCell>
-                {row.available_hours.map(cell => (
-                  <TableCell
-                    desired_date_id={row.id}
-                    desired_time_id={cell.id}
-                    key={cell.id}
-                    component="td"
-                    onClick={cellClick}
-                  >
-                    {cell.hours}
-                  </TableCell>
-                ))}
+                {row.available_hours.map(cell =>
+                  cell.selected ? (
+                    <TableCell
+                      desired_date_id={row.id}
+                      desired_time_id={cell.id}
+                      key={cell.id}
+                      component="td"
+                      style={{ backgroundColor: 'cyan' }}
+                      onClick={cellClick}
+                    >
+                      {cell.hours}
+                    </TableCell>
+                  ) : (
+                    <TableCell
+                      desired_date_id={row.id}
+                      desired_time_id={cell.id}
+                      key={cell.id}
+                      component="td"
+                      onClick={cellClick}
+                    >
+                      {cell.hours}
+                    </TableCell>
+                  )
+                )}
               </TableRow>
             ))}
           </TableBody>
