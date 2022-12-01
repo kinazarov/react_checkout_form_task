@@ -4,6 +4,8 @@ const {
     firstName,
     lastName,
     email,
+    desiredDate,
+    desiredTime,
     nameOnCard,
     cardNumber,
     expiryDate,
@@ -14,6 +16,8 @@ const {
 export default {
   [firstName.name]: '',
   [lastName.name]: '',
+  [desiredDate.name]: '',
+  [desiredTime.name]: '',
   [email.name]: '',
   [nameOnCard.name]: '',
   [cardNumber.name]: '',

@@ -1,15 +1,20 @@
 export default {
   formId: 'checkoutForm',
   formField: {
+    desiredDate: {
+      name: 'desiredDate',
+      label: 'Date*',
+      requiredErrorMsg: 'Date is required'
+    },
+    desiredTime: {
+      name: 'desiredTime',
+      label: 'Time*',
+      requiredErrorMsg: 'Time is required'
+    },
     firstName: {
       name: 'firstName',
       label: 'First name*',
       requiredErrorMsg: 'First name is required'
-    },
-    storeDate: {
-      name: 'storeDate',
-      label: 'Date*',
-      requiredErrorMsg: 'Date is required'
     },
     lastName: {
       name: 'lastName',

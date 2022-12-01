@@ -12,7 +12,6 @@ import { Formik, Form } from 'formik';
 import PersonForm from './Forms/PersonForm';
 import PaymentForm from './Forms/PaymentForm';
 import OrderdatesForm from './Forms/OrderdatesForm';
-import ReviewOrder from './ReviewOrder';
 import CheckoutSuccess from './CheckoutSuccess';
 
 import validationSchema from './FormModel/validationSchema';
@@ -32,11 +31,9 @@ function _renderStepContent(step) {
     case 0:
       return <PersonForm formField={formField} />;
     case 1:
-      return <OrderdatesForm formField={formField} storesData={storesData} />;
+      return <OrderdatesForm formField={formField} datesData={storesData} />;
     case 2:
       return <PaymentForm formField={formField} />;
-    case 3:
-      return <ReviewOrder formField={formField} />;
     default:
       return <div>Not Found</div>;
   }
@@ -48,12 +45,7 @@ export default function CheckoutPage() {
   const currentValidationSchema = validationSchema[activeStep];
   const isLastStep = activeStep === steps.length - 1;
 
-  function _sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
   async function _submitForm(values, actions) {
-    await _sleep(1000);
     alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
 
@@ -82,7 +74,15 @@ export default function CheckoutPage() {
       <Stepper activeStep={activeStep} className={classes.stepper}>
         {steps.map(label => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel>
+              <Button
+                onClick={e => {
+                  setActiveStep(steps.indexOf(label));
+                }}
+              >
+                {label}
+              </Button>
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
