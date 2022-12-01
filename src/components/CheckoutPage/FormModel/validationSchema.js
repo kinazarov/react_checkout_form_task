@@ -28,10 +28,10 @@ export default [
       .matches(emailRegex, email.invalidErrorMsg)
   }),
   Yup.object().shape({
-    [desiredDate.name]: Yup.string().required(
-      `${desiredDate.requiredErrorMsg}`
-    ),
-    [desiredTime.name]: Yup.string().required(`${desiredTime.requiredErrorMsg}`)
+    // [desiredDate.name]: Yup.string().required(
+    //   `${desiredDate.requiredErrorMsg}`
+    // ),
+    // [desiredTime.name]: Yup.string().required(`${desiredTime.requiredErrorMsg}`)
   }),
   Yup.object().shape({
     [nameOnCard.name]: Yup.string().required(`${nameOnCard.requiredErrorMsg}`),
