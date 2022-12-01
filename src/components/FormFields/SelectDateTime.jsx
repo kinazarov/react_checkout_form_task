@@ -20,10 +20,11 @@ function SelectDateTime(props) {
         <Table>
           <TableBody>
             {data.map(row => (
-              <TableRow key={row.id} onClick={rowClick}>
+              <TableRow number={row.id} onClick={rowClick}>
                 <TableCell component="td">{row.date}</TableCell>
                 {row.available_hours.map(cell => (
-                  <TableCell key={cell.id} component="td" onClick={cellClick}>
+
+                  <TableCell number={cell.id} component="td" onClick={cellClick}>
                     {cell.hours}
                   </TableCell>
                 ))}

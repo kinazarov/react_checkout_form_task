@@ -8,11 +8,16 @@ export default function OrderdatesForm(props) {
   } = props;
 
   console.log('OrderdatesForm props', props);
-  const rowClick = (e, key) => {
-    console.log('OrderdatesForm table row', e.target, key);
+  const rowClick = (e) => {
+    console.log('OrderdatesForm table row', e.target);
+
+    e.target.style.background = 'cyan';
   };
-  const cellClick = (e, key) => {
-    console.log('OrderdatesForm table cell ', e.target, key);
+  const cellClick = (e) => {
+    console.log('OrderdatesForm table cell ', e.target);
+
+    e.target.style.background = 'cyan';
+
   };
 
   return (
