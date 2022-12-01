@@ -8,6 +8,8 @@ export default function OrderdatesForm(props) {
     formField: { desiredDate, desiredTime }
   } = props;
 
+  console.log('props', props, desiredDate, desiredDate);
+
   let currentState = cloneDeep(props.datesData);
 
   const [dateTimeState, setDateTimeState] = React.useState(props.datesData);
