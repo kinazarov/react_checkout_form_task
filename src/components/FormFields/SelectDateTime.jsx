@@ -12,8 +12,6 @@ import {
 
 function SelectDateTime(props) {
   const { data, cellClick, ...rest } = props;
-  console.log('datesData', props);
-
   return (
     <FormControl {...rest}>
       <TableContainer component={Paper}>
@@ -45,6 +43,7 @@ function SelectDateTime(props) {
                       desired_date_id={row.id}
                       desired_time_id={cell.id}
                       key={cell.id}
+                      style={{ backgroundColor: cell.color }}
                       component="td"
                       onClick={cellClick}
                     >
