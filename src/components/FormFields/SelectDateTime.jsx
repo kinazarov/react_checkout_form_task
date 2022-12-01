@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 
 function SelectDateTime(props) {
-  const { data, rowClick, cellClick, ...rest } = props;
+  const { data, cellClick, ...rest } = props;
   console.log('datesData', props);
 
   return (
@@ -20,11 +20,18 @@ function SelectDateTime(props) {
         <Table>
           <TableBody>
             {data.map(row => (
-              <TableRow number={row.id} onClick={rowClick}>
-                <TableCell component="td">{row.date}</TableCell>
+              <TableRow key={"ROW" + row.id}>
+                <TableCell component="td" key={row.id}>
+                  {row.date}
+                </TableCell>
                 {row.available_hours.map(cell => (
-
-                  <TableCell number={cell.id} component="td" onClick={cellClick}>
+                  <TableCell
+                    desired_date_id={row.id}
+                    desired_time_id={cell.id}
+                    key={cell.id}
+                    component="td"
+                    onClick={cellClick}
+                  >
                     {cell.hours}
                   </TableCell>
                 ))}
