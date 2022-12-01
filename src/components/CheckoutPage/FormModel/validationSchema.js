@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import dayjs from 'dayjs';
+import moment from 'moment';
 import checkoutFormModel from './checkoutFormModel';
 const {
   formField: {
@@ -45,8 +45,8 @@ export default [
         if (val) {
           const startDate = new Date();
           const endDate = new Date(2050, 12, 31);
-          if (dayjs(val, dayjs.ISO_8601).isValid()) {
-            return dayjs(val).isBetween(startDate, endDate);
+          if (moment(val, moment.ISO_8601).isValid()) {
+            return moment(val).isBetween(startDate, endDate);
           }
           return false;
         }

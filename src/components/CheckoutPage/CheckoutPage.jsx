@@ -25,6 +25,7 @@ import { storesData } from './mock';
 
 const steps = ['Personal Information', 'Order Date & time', 'Payment'];
 const { formId, formField } = checkoutFormModel;
+console.log('formId, formField', formId, formField);
 
 function _renderStepContent(step) {
   switch (step) {

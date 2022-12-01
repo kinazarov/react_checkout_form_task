@@ -1,24 +1,14 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { SelectDateTime } from '../../FormFields';
-import { useField } from 'formik';
+import { useFormikContext } from 'formik';
 import { cloneDeep } from 'lodash';
 
 export default function OrderdatesForm(props) {
-  console.log(props);
   let currentState = cloneDeep(props.datesData);
-  const [field, meta] = useField(props);
 
   const [dateTimeState, setDateTimeState] = React.useState(props.datesData);
-
-  // console.log(dateTimeState);
-
-  const {
-    formField: { desiredDate, desiredTime }
-  } = props;
-
-  console.log(field)
-  console.log(desiredDate, desiredTime)
+  const fmContext = useFormikContext();
 
   function cellClick(e) {
     const desired_date_id = e.target.getAttribute('desired_date_id');
@@ -27,20 +17,26 @@ export default function OrderdatesForm(props) {
     for (let dateRow of currentState) {
       if (dateRow.id === desired_date_id) {
         dateRow.color = 'grey';
-        desiredDate = dateRow.date;
+        console.log('dateRow.date', dateRow.date);
+        fmContext.setFieldValue('desiredDate', dateRow.date);
       } else {
         dateRow.color = undefined;
+        fmContext.setFieldValue('desiredDate', '');
       }
       for (let timeCell of dateRow.available_hours) {
-        timeCell.color =
-          dateRow.id === desired_date_id && timeCell.id === desired_time_id
-            ? 'cyan'
-            : undefined;
+        if (timeCell.id === desired_time_id) {
+          timeCell.color = 'cyan';
+          console.log('timeCell.hours', timeCell.hours);
+          fmContext.setFieldValue('desiredTime', timeCell.hours);
+        } else {
+          timeCell.color = undefined;
+          fmContext.setFieldValue('desiredTime', '');
+        }
       }
     }
 
-    // console.log('newState', currentState);
     setDateTimeState(currentState);
+    console.log('fmContext.values', fmContext.values);
   }
 
   return (
