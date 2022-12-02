@@ -50,7 +50,12 @@ function _renderStepContent(step) {
       return <PersonForm formField={formField} />;
     case 1:
       return (
-        <OrderdatesForm formField={formField} orderData={orderData} selectedNode={selectedNode} stores={stores} />
+        <OrderdatesForm
+          formField={formField}
+          orderData={orderData}
+          selectedNode={selectedNode}
+          stores={stores}
+        />
       );
     case 2:
       return <PaymentForm formField={formField} />;

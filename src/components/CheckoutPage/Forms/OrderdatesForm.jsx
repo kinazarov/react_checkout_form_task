@@ -81,7 +81,12 @@ export default function OrderdatesForm(props) {
       <Typography variant="h6" gutterBottom>
         Order Date & Time
       </Typography>
-      <SelectField name={props.formField.desiredStore.name} label={props.stores.label} data={props.stores} fullWidth />
+      <SelectField
+        name={props.formField.desiredStore.name}
+        label={props.stores.label}
+        data={props.stores}
+        fullWidth
+      />
       <hr />
       <Grid container spacing={4}>
         <Grid item>

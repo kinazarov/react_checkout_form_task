@@ -15,6 +15,20 @@ const {
 } = checkoutFormModel;
 
 export default {
+  [firstName.name]: '',
+  [lastName.name]: '',
+  [desiredStore.name]: '',
+  [desiredDate.name]: '',
+  [desiredTime.name]: '',
+  [email.name]: '',
+  [nameOnCard.name]: '',
+  [cardNumber.name]: '',
+  [expiryDate.name]: '',
+  [cvv.name]: ''
+};
+
+/*
+{
   [firstName.name]: 'Константин',
   [lastName.name]: 'Назаров',
   [desiredStore.name]: '',
@@ -26,3 +40,4 @@ export default {
   [expiryDate.name]: '2026-11-30T22:00:00.000Z',
   [cvv.name]: '111'
 };
+*/
