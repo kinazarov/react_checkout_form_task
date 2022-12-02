@@ -5,6 +5,7 @@ const {
   formField: {
     firstName,
     lastName,
+    desiredStore,
     desiredDate,
     desiredTime,
     email,
@@ -28,11 +29,9 @@ export default [
       .matches(emailRegex, email.invalidErrorMsg)
   }),
   Yup.object().shape({
-    [desiredDate.name]: Yup.string().required(
-      console.log('◩◩◩◩◩◩ desiredDate', desiredDate) ||
-        `${desiredDate.requiredErrorMsg}`
-    ),
-    [desiredTime.name]: Yup.string().required(`${desiredTime.requiredErrorMsg}`)
+    [desiredStore.name]: Yup.string().required(`${desiredStore.requiredErrorMsg}`),
+    [desiredDate.name]: Yup.string(),
+    [desiredTime.name]: Yup.string()
   }),
   Yup.object().shape({
     [nameOnCard.name]: Yup.string().required(`${nameOnCard.requiredErrorMsg}`),

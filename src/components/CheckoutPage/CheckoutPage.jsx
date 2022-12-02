@@ -25,15 +25,32 @@ import { storesData as orderData } from './mock';
 let selectedNode = { desired_date_id: '', desired_time_id: '' };
 
 const steps = ['Personal Information', 'Order Date & time', 'Payment'];
+
+const stores = [
+  {
+    value: 'great',
+    label: 'Our great store in New York'
+  },
+  {
+    value: 'big',
+    label: 'Our great store in Chicago'
+  },
+  {
+    value: 'asian',
+    label: 'Our superb store in Saigon'
+  }
+];
+
 const { formId, formField } = checkoutFormModel;
 
 function _renderStepContent(step) {
+  console.log('◩◩◩◩◩◩ _renderStepContent');
   switch (step) {
     case 0:
       return <PersonForm formField={formField} />;
     case 1:
       return (
-        <OrderdatesForm orderData={orderData} selectedNode={selectedNode} />
+        <OrderdatesForm formField={formField} orderData={orderData} selectedNode={selectedNode} stores={stores} />
       );
     case 2:
       return <PaymentForm formField={formField} />;
@@ -52,7 +69,7 @@ export default function CheckoutPage() {
     console.log('◩◩◩◩◩◩ _handleSubmit values', values);
     console.log('◩◩◩◩◩◩ _handleSubmit actions', actions);
 
-    alert(JSON.stringify(values, null, 2));
+    console.log(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
     selectedNode = { desired_date_id: '', desired_time_id: '' };
 
@@ -65,6 +82,7 @@ export default function CheckoutPage() {
     console.log('◩◩◩◩◩◩ _handleSubmit actions', actions);
 
     if (isLastStep) {
+      console.log('◩◩◩◩◩◩ submitting form', values);
       _submitForm(values, actions);
     } else {
       setActiveStep(activeStep + 1);

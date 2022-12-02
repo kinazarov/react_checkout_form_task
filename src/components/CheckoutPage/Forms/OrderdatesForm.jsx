@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
-import { SelectDateTime } from '../../FormFields';
+import { SelectDateTime, SelectField } from '../../FormFields';
 import { useFormikContext } from 'formik';
 import { clone, cloneDeep, find as _find } from 'lodash';
 
@@ -81,6 +81,8 @@ export default function OrderdatesForm(props) {
       <Typography variant="h6" gutterBottom>
         Order Date & Time
       </Typography>
+      <SelectField name={props.formField.desiredStore.name} label={props.stores.label} data={props.stores} fullWidth />
+      <hr />
       <Grid container spacing={4}>
         <Grid item>
           <SelectDateTime data={dateTimeState} cellClick={cellClick} />

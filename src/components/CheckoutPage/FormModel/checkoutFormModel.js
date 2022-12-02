@@ -1,6 +1,11 @@
 export default {
   formId: 'checkoutForm',
   formField: {
+    desiredStore: {
+      name: 'desiredStore',
+      label: 'Store*',
+      requiredErrorMsg: 'You have to specify the store to take order from'
+    },
     desiredDate: {
       name: 'desiredDate',
       label: 'Date*',
