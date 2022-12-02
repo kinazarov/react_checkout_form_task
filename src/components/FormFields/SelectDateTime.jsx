@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableRow,
   Paper
-} from '@material-ui/core';
+} from '@mui/material';
 
 function SelectDateTime(props) {
   const { data, cellClick, ...rest } = props;

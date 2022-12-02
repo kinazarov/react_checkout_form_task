@@ -1,11 +1,11 @@
 import {
-  createMuiTheme,
+  createTheme,
   responsiveFontSizes,
   makeStyles
-} from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
+} from '@mui/material/styles';
+import { red } from '@mui/material/colors';
 
-let theme = createMuiTheme({
+let theme = createTheme({
   palette: {
     type: 'light',
     primary: red,

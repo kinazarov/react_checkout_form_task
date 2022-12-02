@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import * as Yup from 'yup';
 import moment from 'moment';
 import checkoutFormModel from './checkoutFormModel';
