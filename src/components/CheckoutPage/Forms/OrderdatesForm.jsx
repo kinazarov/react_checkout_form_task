@@ -2,42 +2,48 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { SelectDateTime } from '../../FormFields';
 import { useFormikContext } from 'formik';
-import { cloneDeep } from 'lodash';
+import { clone, cloneDeep } from 'lodash';
 
 export default function OrderdatesForm(props) {
-  let currentState = cloneDeep(props.datesData);
+  const formikContext = useFormikContext();
 
   const [dateTimeState, setDateTimeState] = React.useState(props.datesData);
-  const fmContext = useFormikContext();
-  console.log(fmContext);
+
+  const { formField } = props;
+  console.log('◩◩◩◩◩◩ formField start', formField);
 
   function cellClick(e) {
-    const desired_date_id = e.target.getAttribute('desired_date_id');
-    const desired_time_id = e.target.getAttribute('desired_time_id');
+    let dateTime = cloneDeep(props.datesData);
 
-    for (let dateRow of currentState) {
-      if (dateRow.id === desired_date_id) {
-        dateRow.color = 'grey';
-        console.log('dateRow.date', dateRow.date);
-        fmContext.setFieldValue('desiredDate', dateRow.date);
-      } else {
-        dateRow.color = undefined;
-        fmContext.setFieldValue('desiredDate', '');
-      }
-      for (let timeCell of dateRow.available_hours) {
-        if (timeCell.id === desired_time_id) {
-          timeCell.color = 'cyan';
-          console.log('timeCell.hours', timeCell.hours);
-          fmContext.setFieldValue('desiredTime', timeCell.hours);
-        } else {
-          timeCell.color = undefined;
-          fmContext.setFieldValue('desiredTime', '');
+    const desired_date_id = e.target.getAttribute('desired_date_id');
+
+    const desired_time_id = e.target.getAttribute('desired_time_id');
+    console.log('◩◩◩◩◩◩ formikContext.values', formikContext.values);
+
+    let newFormikValues = clone(formikContext.values);
+
+    for (let dateRow of dateTime) {
+      let selectedDate = dateRow.id === desired_date_id;
+      dateRow.color = selectedDate ? 'grey' : undefined;
+      console.log('◩◩◩◩◩◩ formikContext', formikContext);
+
+      if (selectedDate) {
+        newFormikValues.desiredDate = dateRow.date;
+        for (let timeCell of dateRow.available_hours) {
+          let selectedTime = timeCell.id === desired_time_id;
+          timeCell.color = selectedTime ? 'cyan' : undefined;
+          if (selectedTime) {
+            newFormikValues.desiredTime = dateRow.date;
+            formikContext.setValues(newFormikValues);
+          }
         }
+
+        break;
       }
     }
 
-    setDateTimeState(currentState);
-    console.log('fmContext.values', fmContext.values);
+    console.log('◩◩◩◩◩◩ formikContext.values', formikContext.values);
+    setDateTimeState(dateTime);
   }
 
   return (
