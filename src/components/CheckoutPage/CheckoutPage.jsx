@@ -21,18 +21,20 @@ import formInitialValues from './FormModel/formInitialValues';
 import useStyles from './styles';
 
 // here should be actual data retrieving
-import { storesData } from './mock';
+import { storesData as orderData } from './mock';
+let selectedNode = { desired_date_id: '', desired_time_id: '' };
 
 const steps = ['Personal Information', 'Order Date & time', 'Payment'];
 const { formId, formField } = checkoutFormModel;
-console.log('formId, formField', formId, formField);
 
 function _renderStepContent(step) {
   switch (step) {
     case 0:
       return <PersonForm formField={formField} />;
     case 1:
-      return <OrderdatesForm formField={formField} datesData={storesData} />;
+      return (
+        <OrderdatesForm orderData={orderData} selectedNode={selectedNode} />
+      );
     case 2:
       return <PaymentForm formField={formField} />;
     default:
@@ -47,23 +49,34 @@ export default function CheckoutPage() {
   const isLastStep = activeStep === steps.length - 1;
 
   async function _submitForm(values, actions) {
+    console.log('◩◩◩◩◩◩ _handleSubmit values', values);
+    console.log('◩◩◩◩◩◩ _handleSubmit actions', actions);
+
     alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
+    selectedNode = { desired_date_id: '', desired_time_id: '' };
 
     setActiveStep(activeStep + 1);
   }
 
   function _handleSubmit(values, actions) {
+    console.log('◩◩◩◩◩◩ values', values);
+    console.log('◩◩◩◩◩◩ _handleSubmit activeStep', activeStep);
+    console.log('◩◩◩◩◩◩ _handleSubmit actions', actions);
+
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
       setActiveStep(activeStep + 1);
+      console.log('◩◩◩◩◩◩ now activeStep', activeStep);
       actions.setTouched({});
       actions.setSubmitting(false);
     }
   }
 
   function _handleBack() {
+    console.log('◩◩◩◩◩◩ _handleBack activeStep', activeStep);
+
     setActiveStep(activeStep - 1);
   }
 
@@ -98,6 +111,7 @@ export default function CheckoutPage() {
           >
             {({ isSubmitting }) => (
               <Form id={formId}>
+                {console.log('◩◩◩◩◩◩ isSubmitting', isSubmitting)}
                 {_renderStepContent(activeStep)}
 
                 <div className={classes.buttons}>

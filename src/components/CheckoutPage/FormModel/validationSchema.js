@@ -29,7 +29,8 @@ export default [
   }),
   Yup.object().shape({
     [desiredDate.name]: Yup.string().required(
-      `${desiredDate.requiredErrorMsg}`
+      console.log('◩◩◩◩◩◩ desiredDate', desiredDate) ||
+        `${desiredDate.requiredErrorMsg}`
     ),
     [desiredTime.name]: Yup.string().required(`${desiredTime.requiredErrorMsg}`)
   }),
