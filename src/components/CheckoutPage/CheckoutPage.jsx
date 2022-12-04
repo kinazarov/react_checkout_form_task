@@ -70,7 +70,6 @@ export default function CheckoutPage() {
   const isLastStep = activeStep === steps.length - 1;
 
   async function _submitForm(values, actions) {
-
     actions.setSubmitting(false);
     selectedNode = { desired_date_id: '', desired_time_id: '' };
 
@@ -78,7 +77,6 @@ export default function CheckoutPage() {
   }
 
   function _handleSubmit(values, actions) {
-
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
@@ -89,7 +87,6 @@ export default function CheckoutPage() {
   }
 
   function _handleBack() {
-
     setActiveStep(activeStep - 1);
   }
 
@@ -101,15 +98,7 @@ export default function CheckoutPage() {
       <Stepper activeStep={activeStep} className={classes.stepper}>
         {steps.map(label => (
           <Step key={label}>
-            <StepLabel>
-              <Button
-                onClick={e => {
-                  setActiveStep(steps.indexOf(label));
-                }}
-              >
-                {label}
-              </Button>
-            </StepLabel>
+            <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
