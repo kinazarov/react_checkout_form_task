@@ -1,5 +1,6 @@
 import React from 'react';
-import { Paper, CssBaseline } from '@mui/material';
+import { Paper } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 
 import Header from '../Header';

@@ -7,7 +7,7 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-  Paper
+  Paper,
 } from '@mui/material';
 
 function SelectDateTime(props) {
@@ -17,7 +17,7 @@ function SelectDateTime(props) {
       <TableContainer component={Paper}>
         <Table>
           <TableBody>
-            {data.map(row => (
+            {data.map((row) => (
               <TableRow key={'ROW' + row.id}>
                 <TableCell
                   component="td"
@@ -26,7 +26,7 @@ function SelectDateTime(props) {
                 >
                   {row.date}
                 </TableCell>
-                {row.available_hours.map(cell =>
+                {row.available_hours.map((cell) =>
                   cell.selected ? (
                     <TableCell
                       desired_date_id={row.id}
@@ -61,11 +61,11 @@ function SelectDateTime(props) {
 }
 
 SelectDateTime.defaultProps = {
-  data: []
+  data: [],
 };
 
 SelectDateTime.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
 };
 
 export default SelectDateTime;

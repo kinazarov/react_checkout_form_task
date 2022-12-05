@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import * as Yup from 'yup';
 import moment from 'moment';
 import checkoutFormModel from './checkoutFormModel';
@@ -13,13 +12,15 @@ const {
     nameOnCard,
     cardNumber,
     expiryDate,
-    cvv
-  }
+    cvv,
+  },
 } = checkoutFormModel;
 
 const visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
 // eslint-disable-next-line no-control-regex
-const emailRegex = /^((([a-z]|[A-Z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/;
+const emailRegex =
+  // eslint-disable-next-line no-control-regex
+  /^((([a-z]|[A-Z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#$%&'*+\-/=?^_`{|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/;
 
 export default [
   Yup.object().shape({
@@ -27,14 +28,14 @@ export default [
     [lastName.name]: Yup.string().required(`${lastName.requiredErrorMsg}`),
     [email.name]: Yup.string()
       .required(`${email.requiredErrorMsg}`)
-      .matches(emailRegex, email.invalidErrorMsg)
+      .matches(emailRegex, email.invalidErrorMsg),
   }),
   Yup.object().shape({
     [desiredStore.name]: Yup.string().required(
       `${desiredStore.requiredErrorMsg}`
     ),
     [desiredDate.name]: Yup.string(),
-    [desiredTime.name]: Yup.string()
+    [desiredTime.name]: Yup.string(),
   }),
   Yup.object().shape({
     [nameOnCard.name]: Yup.string().required(`${nameOnCard.requiredErrorMsg}`),
@@ -44,7 +45,7 @@ export default [
     [expiryDate.name]: Yup.string()
       .nullable()
       .required(`${expiryDate.requiredErrorMsg}`)
-      .test('expDate', expiryDate.invalidErrorMsg, val => {
+      .test('expDate', expiryDate.invalidErrorMsg, (val) => {
         if (val) {
           const startDate = new Date();
           const endDate = new Date(2050, 12, 31);
@@ -57,6 +58,6 @@ export default [
       }),
     [cvv.name]: Yup.string()
       .required(`${cvv.requiredErrorMsg}`)
-      .test('len', `${cvv.invalidErrorMsg}`, val => val && val.length === 3)
-  })
+      .test('len', `${cvv.invalidErrorMsg}`, (val) => val && val.length === 3),
+  }),
 ];

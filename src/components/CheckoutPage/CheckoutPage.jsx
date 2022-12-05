@@ -5,7 +5,7 @@ import {
   StepLabel,
   Button,
   Typography,
-  CircularProgress
+  CircularProgress,
 } from '@mui/material';
 import { Formik, Form } from 'formik';
 
@@ -29,22 +29,21 @@ const steps = ['Personal Information', 'Order Date & time', 'Payment'];
 const stores = [
   {
     value: 'great',
-    label: 'Our great store in New York'
+    label: 'Our great store in New York',
   },
   {
     value: 'big',
-    label: 'Our great store in Chicago'
+    label: 'Our great store in Chicago',
   },
   {
     value: 'asian',
-    label: 'Our superb store in Saigon'
-  }
+    label: 'Our superb store in Saigon',
+  },
 ];
 
 const { formId, formField } = checkoutFormModel;
 
 function _renderStepContent(step) {
-  console.log('◩◩◩◩◩◩ _renderStepContent');
   switch (step) {
     case 0:
       return <PersonForm formField={formField} />;
@@ -71,10 +70,6 @@ export default function CheckoutPage() {
   const isLastStep = activeStep === steps.length - 1;
 
   async function _submitForm(values, actions) {
-    console.log('◩◩◩◩◩◩ _handleSubmit values', values);
-    console.log('◩◩◩◩◩◩ _handleSubmit actions', actions);
-
-    console.log(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
     selectedNode = { desired_date_id: '', desired_time_id: '' };
 
@@ -82,24 +77,16 @@ export default function CheckoutPage() {
   }
 
   function _handleSubmit(values, actions) {
-    console.log('◩◩◩◩◩◩ values', values);
-    console.log('◩◩◩◩◩◩ _handleSubmit activeStep', activeStep);
-    console.log('◩◩◩◩◩◩ _handleSubmit actions', actions);
-
     if (isLastStep) {
-      console.log('◩◩◩◩◩◩ submitting form', values);
       _submitForm(values, actions);
     } else {
       setActiveStep(activeStep + 1);
-      console.log('◩◩◩◩◩◩ now activeStep', activeStep);
       actions.setTouched({});
       actions.setSubmitting(false);
     }
   }
 
   function _handleBack() {
-    console.log('◩◩◩◩◩◩ _handleBack activeStep', activeStep);
-
     setActiveStep(activeStep - 1);
   }
 
@@ -109,17 +96,9 @@ export default function CheckoutPage() {
         Checkout
       </Typography>
       <Stepper activeStep={activeStep} className={classes.stepper}>
-        {steps.map(label => (
+        {steps.map((label) => (
           <Step key={label}>
-            <StepLabel>
-              <Button
-                onClick={e => {
-                  setActiveStep(steps.indexOf(label));
-                }}
-              >
-                {label}
-              </Button>
-            </StepLabel>
+            <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
@@ -134,7 +113,6 @@ export default function CheckoutPage() {
           >
             {({ isSubmitting }) => (
               <Form id={formId}>
-                {console.log('◩◩◩◩◩◩ isSubmitting', isSubmitting)}
                 {_renderStepContent(activeStep)}
 
                 <div className={classes.buttons}>

@@ -1,7 +1,6 @@
+import {makeStyles}  from '@mui/styles';
 import {
   createTheme,
-  responsiveFontSizes,
-  makeStyles
 } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
@@ -12,8 +11,6 @@ let theme = createTheme({
     secondary: red
   }
 });
-
-theme = responsiveFontSizes(theme);
 
 const useStyle = makeStyles(() => ({
   root: {

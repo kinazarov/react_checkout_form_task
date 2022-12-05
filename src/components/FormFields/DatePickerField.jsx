@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useField } from 'formik';
 import Grid from '@mui/material/Grid';
-import DatePicker from '@mui/lab/DatePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-
+import {LocalizationProvider, DatePicker} from '@mui/x-date-pickers';
+import AdapterDateFns from '@mui/lab/AdapterDateFns'
 
 export default function DatePickerField(props) {
   const [field, meta, helper] = useField(props);
@@ -37,7 +35,7 @@ export default function DatePickerField(props) {
 
   return (
     <Grid container>
-      <LocalizationProvider dateAdapter={AdapterDateFns}></LocalizationProvider>
+      <LocalizationProvider utils={AdapterDateFns}>
         <DatePicker
           {...field}
           {...props}
@@ -47,6 +45,7 @@ export default function DatePickerField(props) {
           invalidDateMessage={isError && error}
           helperText={isError && error}
         />
+      </LocalizationProvider>
     </Grid>
   );
 }
