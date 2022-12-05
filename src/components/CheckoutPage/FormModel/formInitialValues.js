@@ -21,10 +21,10 @@ export default {
   [desiredDate.name]: '',
   [desiredTime.name]: '',
   [email.name]: '',
-  [nameOnCard.name]: '',
-  [cardNumber.name]: '',
-  [expiryDate.name]: '',
-  [cvv.name]: ''
+  [nameOnCard.name]: 'ff',
+  [cardNumber.name]: '4111111111111',
+  [expiryDate.name]: '2026-11-30T22:00:00.000Z',
+  [cvv.name]: '111'
 };
 
 /*

@@ -70,8 +70,9 @@ export default function OrderdatesForm(props) {
     }
     if (timeNode) {
       timeNode.color = TIME_COLOR;
-      newFormikValues.desiredTime = dateNode.hours;
+      newFormikValues.desiredTime = timeNode.hours;
     }
+    formikContext.setValues(newFormikValues);
 
     setDateTimeState(dateTime);
   }

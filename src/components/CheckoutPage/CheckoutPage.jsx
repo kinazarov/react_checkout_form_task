@@ -4,6 +4,7 @@ import {
   Step,
   StepLabel,
   Button,
+  Snackbar,
   Typography,
   CircularProgress
 } from '@material-ui/core';
@@ -24,7 +25,9 @@ import useStyles from './styles';
 import { storesData as orderData } from './mock';
 let selectedNode = { desired_date_id: '', desired_time_id: '' };
 
-const steps = ['Personal Information', 'Order Date & time', 'Payment'];
+let steps = ['Personal Information', 'Order Date & time', 'Payment'].map(v => {
+  return { name: v, completed: false };
+});
 
 const stores = [
   {
@@ -66,21 +69,38 @@ function _renderStepContent(step) {
 export default function CheckoutPage() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
+  const [errorSnackbar, showError] = useState([false, '']);
   const currentValidationSchema = validationSchema[activeStep];
   const isLastStep = activeStep === steps.length - 1;
 
-  async function _submitForm(values, actions) {
+  function _submitForm(values, actions) {
     actions.setSubmitting(false);
     selectedNode = { desired_date_id: '', desired_time_id: '' };
-
+    for (let step of steps) {
+      step.completed = false;
+    }
     setActiveStep(activeStep + 1);
   }
 
   function _handleSubmit(values, actions) {
     if (isLastStep) {
-      _submitForm(values, actions);
+      let doSubmit = true;
+
+      for (let index = 0; index < steps.length - 2; index++) {
+        if (!steps[index].completed) {
+          actions.setSubmitting(false);
+          setActiveStep(index);
+          showError([true, `Please fill ${steps[index].name}`]);
+          doSubmit = false;
+          break;
+        }
+      }
+      if (doSubmit) {
+        _submitForm(values, actions);
+      }
     } else {
       setActiveStep(activeStep + 1);
+      steps[activeStep].completed = true;
       actions.setTouched({});
       actions.setSubmitting(false);
     }
@@ -95,10 +115,18 @@ export default function CheckoutPage() {
       <Typography component="h1" variant="h4" align="center">
         Checkout
       </Typography>
-      <Stepper activeStep={activeStep} className={classes.stepper}>
-        {steps.map(label => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+      <Stepper nonLinear activeStep={activeStep} className={classes.stepper}>
+        {steps.map((step, index) => (
+          <Step key={step.name} completed={step.completed}>
+            <StepLabel>
+              <Button
+                onClick={e => {
+                  setActiveStep(index);
+                }}
+              >
+                {step.name}
+              </Button>
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
@@ -110,6 +138,11 @@ export default function CheckoutPage() {
             initialValues={formInitialValues}
             validationSchema={currentValidationSchema}
             onSubmit={_handleSubmit}
+            validate={values => {
+              if (activeStep >= 1) {
+                showError([!values.desiredDate, 'Please pick date and time']);
+              }
+            }}
           >
             {({ isSubmitting }) => (
               <Form id={formId}>
@@ -144,6 +177,12 @@ export default function CheckoutPage() {
           </Formik>
         )}
       </React.Fragment>
+      <Snackbar
+        severity="error"
+        open={errorSnackbar[0]}
+        autoHideDuration={1000}
+        message={errorSnackbar[1]}
+      />
     </React.Fragment>
   );
 }
