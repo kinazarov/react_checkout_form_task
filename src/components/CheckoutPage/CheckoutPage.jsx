@@ -46,32 +46,14 @@ const stores = [
 
 const { formId, formField } = checkoutFormModel;
 
-function _renderStepContent(step) {
-  switch (step) {
-    case 0:
-      return <PersonForm formField={formField} />;
-    case 1:
-      return (
-        <OrderdatesForm
-          formField={formField}
-          orderData={orderData}
-          selectedNode={selectedNode}
-          stores={stores}
-        />
-      );
-    case 2:
-      return <PaymentForm formField={formField} />;
-    default:
-      return <div>Not Found</div>;
-  }
-}
-
 export default function CheckoutPage() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [errorSnackbar, showError] = useState([false, '']);
   const currentValidationSchema = validationSchema[activeStep];
   const isLastStep = activeStep === steps.length - 1;
+
+  let formikState = null;
 
   function _submitForm(values, actions) {
     actions.setSubmitting(false);
@@ -82,11 +64,33 @@ export default function CheckoutPage() {
     setActiveStep(activeStep + 1);
   }
 
+  function _renderStepContent(f_props, step) {
+    formikState = f_props;
+
+    switch (step) {
+      case 0:
+        return <PersonForm formField={formField} />;
+      case 1:
+        return (
+          <OrderdatesForm
+            formField={formField}
+            orderData={orderData}
+            selectedNode={selectedNode}
+            stores={stores}
+          />
+        );
+      case 2:
+        return <PaymentForm formField={formField} />;
+      default:
+        return <div>Not Found</div>;
+    }
+  }
+
   function _handleSubmit(values, actions) {
     if (isLastStep) {
       let doSubmit = true;
 
-      for (let index = 0; index < steps.length - 2; index++) {
+      for (let index = 0; index < steps.length - 1; index++) {
         if (!steps[index].completed) {
           actions.setSubmitting(false);
           setActiveStep(index);
@@ -120,7 +124,13 @@ export default function CheckoutPage() {
           <Step key={step.name} completed={step.completed}>
             <StepLabel>
               <Button
-                onClick={e => {
+                onClick={async e => {
+                  steps[activeStep].completed = true;
+                  try {
+                    await currentValidationSchema.validate(formikState.values);
+                  } catch (e) {
+                    steps[activeStep].completed = false;
+                  }
                   setActiveStep(index);
                 }}
               >
@@ -138,15 +148,10 @@ export default function CheckoutPage() {
             initialValues={formInitialValues}
             validationSchema={currentValidationSchema}
             onSubmit={_handleSubmit}
-            validate={values => {
-              if (activeStep >= 1) {
-                showError([!values.desiredDate, 'Please pick date and time']);
-              }
-            }}
           >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, ...f_props }) => (
               <Form id={formId}>
-                {_renderStepContent(activeStep)}
+                {_renderStepContent(f_props, activeStep)}
 
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
